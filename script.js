@@ -1,5 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  /* ---------------- BACKGROUND COLORS ---------------- */
+
+  const pastelColors = [
+    "#ffe4ec", // pink
+    "#e8f5e9", // green
+    "#e3f2fd", // blue
+    "#fffde7", // yellow
+    "#f3e5f5"  // lavender
+  ];
+
+  function changeBackground() {
+    const random =
+      pastelColors[Math.floor(Math.random() * pastelColors.length)];
+    document.body.style.backgroundColor = random;
+  }
+
   /* ---------------- INTRO PAGES ---------------- */
 
   const introPages = [
@@ -15,9 +31,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const textEl = document.getElementById("text");
   const nextBtn = document.getElementById("nextBtn");
 
-  function typeText(text, i = 0) {
+  function typeText(text) {
     isTyping = true;
     textEl.textContent = "";
+    let i = 0;
 
     const interval = setInterval(() => {
       textEl.textContent += text.charAt(i);
@@ -48,22 +65,6 @@ document.addEventListener("DOMContentLoaded", () => {
       showValentinePage();
     }
   });
-
-  /* ---------------- BACKGROUND COLORS ---------------- */
-
-  const pastelColors = [
-    "#ffe4ec", // pink
-    "#e8f5e9", // green
-    "#e3f2fd", // blue
-    "#fffde7", // yellow
-    "#f3e5f5"  // lavender
-  ];
-
-  function changeBackground() {
-    const random =
-      pastelColors[Math.floor(Math.random() * pastelColors.length)];
-    document.body.style.backgroundColor = random;
-  }
 
   /* ---------------- FINAL PAGE ---------------- */
 
@@ -125,5 +126,4 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   setInterval(createHeart, 400);
-
 });
