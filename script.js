@@ -1,57 +1,46 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* ============================
-     INTRO DATA
-  ============================ */
+  /* ---------------- INTRO PAGES ---------------- */
 
   const introPages = [
-    { title: "Hey ❤️", sub: "" },
-    { title: "I made something for you", sub: "Just a small surprise 😊" },
-    { title: "Because you matter to me", sub: "More than you know 💕" },
-    { title: "Every moment feels better", sub: "When you’re around 🌸" },
-    { title: "So I wanted to ask you something...", sub: "And I hope you smile 😌" }
+    "Hey 👀",
+    "I have something important to ask you 💭",
+    "But before that…",
+    "I hope this makes you smile 😊"
   ];
 
   let pageIndex = 0;
   let isTyping = false;
 
-  const introText = document.getElementById("introText");
-  const subText = document.getElementById("subText");
+  const textEl = document.getElementById("text");
   const nextBtn = document.getElementById("nextBtn");
 
-  /* ============================
-     TYPEWRITER EFFECT
-  ============================ */
-
-  function typeText(text, element, callback) {
+  function typeText(text, i = 0) {
     isTyping = true;
-    element.textContent = "";
-    let i = 0;
+    textEl.textContent = "";
 
     const interval = setInterval(() => {
-      element.textContent += text.charAt(i);
+      textEl.textContent += text.charAt(i);
       i++;
-
       if (i >= text.length) {
         clearInterval(interval);
         isTyping = false;
-        if (callback) callback();
       }
     }, 50);
   }
 
   function loadPage() {
-    typeText(introPages[pageIndex].title, introText, () => {
-      typeText(introPages[pageIndex].sub, subText);
-    });
+    typeText(introPages[pageIndex]);
   }
 
   loadPage();
+  changeBackground();
 
   nextBtn.addEventListener("click", () => {
     if (isTyping) return;
 
     pageIndex++;
+    changeBackground();
 
     if (pageIndex < introPages.length) {
       loadPage();
@@ -60,52 +49,81 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  /* ============================
-     SHOW FINAL PAGE
-  ============================ */
+  /* ---------------- BACKGROUND COLORS ---------------- */
+
+  const pastelColors = [
+    "#ffe4ec", // pink
+    "#e8f5e9", // green
+    "#e3f2fd", // blue
+    "#fffde7", // yellow
+    "#f3e5f5"  // lavender
+  ];
+
+  function changeBackground() {
+    const random =
+      pastelColors[Math.floor(Math.random() * pastelColors.length)];
+    document.body.style.backgroundColor = random;
+  }
+
+  /* ---------------- FINAL PAGE ---------------- */
 
   function showValentinePage() {
     document.getElementById("introContainer").classList.add("hidden");
     document.getElementById("valentineSection").classList.remove("hidden");
+    changeBackground();
   }
 
-  /* ============================
-     VALENTINE LOGIC
-  ============================ */
+  /* ---------------- YES / NO LOGIC ---------------- */
 
   const yesBtn = document.getElementById("yesBtn");
   const noBtn = document.getElementById("noBtn");
-  const messageEl = document.getElementById("message");
+  const message = document.getElementById("message");
 
-  let noClicks = 0;
+  let yesSize = 18;
+  let noSize = 18;
 
   const cuteMessages = [
     "Are you sure? 🥺",
-    "Think again 💗",
-    "I’ll make it special 🌸",
-    "One cute date, please? 😌",
-    "I’ll bring chocolates 🍫",
-    "You’re making me blush 😳",
-    "My heart says yes 💕",
-    "You know you want to 😄"
+    "Think again 💭",
+    "I’ll wait 💕",
+    "You’re breaking my heart 😢",
+    "Okay last chance 😭"
   ];
 
   noBtn.addEventListener("click", () => {
-    noClicks++;
+    yesSize += 6;
+    noSize = Math.max(8, noSize - 2);
 
-    yesBtn.style.transform = `scale(${1 + noClicks * 0.18})`;
-    noBtn.style.transform = `scale(${Math.max(1 - noClicks * 0.12, 0.3)})`;
+    yesBtn.style.fontSize = yesSize + "px";
+    noBtn.style.fontSize = noSize + "px";
 
-    messageEl.textContent =
-      cuteMessages[noClicks % cuteMessages.length];
+    message.textContent =
+      cuteMessages[Math.floor(Math.random() * cuteMessages.length)];
   });
 
   yesBtn.addEventListener("click", () => {
-    document.getElementById("valentineSection").innerHTML = `
-      <h1>YAYYYY 💖🥰</h1>
-      <p>You just made me really happy 💕</p>
-      <p>Can’t wait for our date 💐</p>
-    `;
+    message.textContent = "YAYYY!!! 💖🥹 You just made me the happiest!";
   });
+
+  /* ---------------- FLOATING HEARTS ---------------- */
+
+  const heartsContainer = document.getElementById("hearts-container");
+
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerText = "💓";
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = 4 + Math.random() * 3 + "s";
+
+    heartsContainer.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 7000);
+  }
+
+  setInterval(createHeart, 400);
 
 });
