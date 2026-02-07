@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* ---------------- BACKGROUND COLORS ---------------- */
+  /* ================= BACKGROUND COLORS FIRST ================= */
 
   const pastelColors = [
     "#ffe4ec", // pink
@@ -11,12 +11,11 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   function changeBackground() {
-    const random =
-      pastelColors[Math.floor(Math.random() * pastelColors.length)];
+    const random = pastelColors[Math.floor(Math.random() * pastelColors.length)];
     document.body.style.backgroundColor = random;
   }
 
-  /* ---------------- INTRO PAGES ---------------- */
+  /* ================= INTRO PAGES ================= */
 
   const introPages = [
     "Hey 👀",
@@ -50,9 +49,11 @@ document.addEventListener("DOMContentLoaded", () => {
     typeText(introPages[pageIndex]);
   }
 
+  /* LOAD FIRST PAGE */
   loadPage();
   changeBackground();
 
+  /* NEXT BUTTON */
   nextBtn.addEventListener("click", () => {
     if (isTyping) return;
 
@@ -66,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  /* ---------------- FINAL PAGE ---------------- */
+  /* ================= FINAL PAGE ================= */
 
   function showValentinePage() {
     document.getElementById("introContainer").classList.add("hidden");
@@ -74,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
     changeBackground();
   }
 
-  /* ---------------- YES / NO LOGIC ---------------- */
+  /* ================= YES / NO BUTTONS ================= */
 
   const yesBtn = document.getElementById("yesBtn");
   const noBtn = document.getElementById("noBtn");
@@ -98,15 +99,14 @@ document.addEventListener("DOMContentLoaded", () => {
     yesBtn.style.fontSize = yesSize + "px";
     noBtn.style.fontSize = noSize + "px";
 
-    message.textContent =
-      cuteMessages[Math.floor(Math.random() * cuteMessages.length)];
+    message.textContent = cuteMessages[Math.floor(Math.random() * cuteMessages.length)];
   });
 
   yesBtn.addEventListener("click", () => {
     message.textContent = "YAYYY!!! 💖🥹 You just made me the happiest!";
   });
 
-  /* ---------------- FLOATING HEARTS ---------------- */
+  /* ================= FLOATING HEARTS ================= */
 
   const heartsContainer = document.getElementById("hearts-container");
 
@@ -120,10 +120,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     heartsContainer.appendChild(heart);
 
-    setTimeout(() => {
-      heart.remove();
-    }, 7000);
+    setTimeout(() => heart.remove(), 7000);
   }
 
   setInterval(createHeart, 400);
+
 });
