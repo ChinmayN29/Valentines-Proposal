@@ -1,69 +1,92 @@
-* {
-  box-sizing: border-box;
-}
-
 body {
   margin: 0;
-  background: linear-gradient(135deg, #ffdde1, #ee9ca7);
   font-family: "Segoe UI", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   text-align: center;
+  overflow: hidden;
+  transition: background-color 0.8s ease;
 }
 
+/* Containers */
 .container {
-  width: 90%;
   max-width: 500px;
+  padding: 30px;
 }
 
+/* Hidden */
 .hidden {
   display: none;
 }
 
-h1 {
-  color: #c2185b;
-  font-size: 28px;
+/* Intro text */
+#text {
+  font-size: 22px;
+  margin-bottom: 20px;
 }
 
-p {
-  font-size: 18px;
-  color: #444;
-  min-height: 24px;
-}
-
+/* Buttons */
 button {
-  padding: 12px 30px;
+  padding: 12px 24px;
   font-size: 18px;
   border: none;
-  border-radius: 10px;
+  border-radius: 30px;
   cursor: pointer;
-  margin-top: 20px;
-  transition: all 0.3s ease;
+  margin: 10px;
 }
 
-#nextBtn {
-  background: #ec407a;
-  color: white;
-}
-
-.buttons {
-  margin-top: 20px;
-}
-
+/* YES button glow */
 #yesBtn {
-  background: #e91e63;
+  background-color: #ff4d88;
   color: white;
+  animation: glow 1.5s infinite alternate;
 }
 
+@keyframes glow {
+  from {
+    box-shadow: 0 0 10px #ff9ecb;
+  }
+  to {
+    box-shadow: 0 0 25px #ff4d88;
+  }
+}
+
+/* NO button */
 #noBtn {
-  background: #cfd8dc;
-  color: #333;
+  background-color: #ccc;
 }
 
+/* Final intro line */
+#finalIntro {
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: #6a1b9a;
+}
+
+/* Cute message */
 #message {
-  margin-top: 15px;
+  margin-top: 20px;
   font-size: 18px;
-  color: #880e4f;
+}
+
+/* Floating hearts */
+.heart {
+  position: absolute;
+  bottom: -20px;
+  font-size: 20px;
+  animation: floatUp linear forwards;
+  opacity: 0.8;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-110vh);
+    opacity: 0;
+  }
 }
